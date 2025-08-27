@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartBite Desktop Layout</title>
+
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 40px;
+      background: #fff8f2;
+      color: #50280f;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #50280f;
+      overflow: hidden;
+      padding: 10px 0;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+    .navbar a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    .navbar a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    img.logo {
+      display: block;
+      margin: 0 auto 30px;
+      width: 300px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    /* Layout container */
+    .main-content {
+      display: flex;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 40px auto;
+      align-items: flex-start;
+    }
+
+    /* Left: Text sections */
+    .text-sections {
+      flex: 1.2;
+      max-width: 700px;
+    }
+
+    .text-sections section {
+      margin-bottom: 30px;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(80, 40, 15, 0.1);
+    }
+
+    .text-sections h3 {
+      margin-top: 0;
+      border-bottom: 2px solid #04AA6D;
+      padding-bottom: 6px;
+    }
+
+    .text-sections ul {
+      padding-left: 20px;
+    }
+    .text-sections ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Right: Slideshow */
+    .slideshow-container {
+      flex: 1;
+      max-width: 450px;
+      position: relative;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(80, 40, 15, 0.1);
+      padding: 15px;
+    }
+
+    .mySlides {
+      display: none;
+    }
+
+    .mySlides img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .numbertext {
+      color: #50280f;
+      font-size: 14px;
+      padding: 5px 10px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: #50280f;
+      font-weight: bold;
+      font-size: 22px;
+      border-radius: 3px;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.8);
+      transition: background 0.3s;
+    }
+
+    .prev:hover,
+    .next:hover {
+      background: #04AA6D;
+      color: white;
+    }
+
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+
+    .caption-container {
+      text-align: center;
+      background-color: #04AA6D;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 0 0 10px 10px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      gap: 8px;
+    }
+
+    .column {
+      flex: 1;
+      cursor: pointer;
+      opacity: 0.6;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: opacity 0.3s, border-color 0.3s;
+    }
+
+    .column img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .column:hover,
+    .active {
+      opacity: 1;
+      border-color: #04AA6D;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #50280f;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 14px;
+      border-radius: 6px 6px 0 0;
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+    }
+
+    /* Responsive fallback (small desktops and tablets) */
+    @media (max-width: 900px) {
+      body {
+        padding: 20px;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+      .slideshow-container,
+      .text-sections {
+        max-width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="index.html" class="active"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="about.html"><i class="fa fa-fw fa-user"></i> About</a>
+    <a href="contact.html"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+    <a class="active" href="registration.html"><i class="fa fa-fw fa-user-plus"></i> Registration</a>
+  </div>
+
+  <h1>SmartBite</h1>
+  <img src="./SmartBite.png" alt="SmartBite Logo" class="logo" />
+
+  <div class="main-content">
+    <div class="text-sections">
+      <section>
+        <h3>Humble Beginnings</h3>
+        <p>SmartBite was founded with a simple yet powerful vision — to revolutionize fast-food delivery by combining speed, convenience, and quality. What started as a small idea to bring delicious meals closer to customers quickly has grown into one of the most reliable and innovative food delivery services in South Africa.</p>
+      </section>
+
+      <section>
+        <h3>Identifying a Market Gap</h3>
+        <p>In today’s fast-paced world, customers want fresh, tasty, and affordable meals delivered right to their doorstep — and they want them fast. SmartBite identified the need for a dedicated food delivery platform that partners with top restaurants, fast-food outlets, and kitchens to offer a wide variety of meals without compromising on quality or service.</p>
+      </section>
+
+      <section>
+        <h3>Growth and Expansion</h3>
+        <p>From a handful of partner restaurants, SmartBite has grown into a leading fast-food delivery platform, connecting thousands of customers with their favorite meals every day. With an extensive delivery network and state-of-the-art ordering technology, SmartBite ensures quick, efficient, and reliable deliveries to homes, offices, and on-the-go customers.</p>
+      </section>
+
+      <section>
+        <h3>National Footprint</h3>
+        <p>With its Head Office strategically located to coordinate operations, SmartBite continues to expand its reach across South Africa. Our partnerships with restaurants, franchises, and local food outlets allow us to offer an unmatched variety of cuisines, making SmartBite the go-to choice for fast-food delivery in multiple cities and towns nationwide.</p>
+      </section>
+
+      <section>
+        <h3>Our Commitment</h3>
+        <p>At SmartBite, our mission is simple: deliver happiness, one meal at a time. We are committed to ensuring that every order is prepared with care, handled with speed, and delivered with excellence. Our dedicated team, advanced technology, and customer-first approach set us apart as a trusted leader in the food delivery industry.</p>
+      </section>
+
+      <section>
+        <h3>Our Values – What Drives SmartBite</h3>
+        <p>At SmartBite, our values are at the heart of everything we do. They guide the way we serve our customers, build partnerships, and grow our business. We believe that success comes from staying true to these principles:</p>
+        <ul>
+          <li><strong>Customer First:</strong> Our customers are at the center of everything we do. We strive to deliver happiness by ensuring fast, reliable, and seamless food delivery — every single time.</li>
+          <li><strong>Speed & Efficiency:</strong> We understand the importance of time. That’s why we are committed to delivering fresh, hot, and delicious meals to your doorstep as quickly as possible, without compromising on quality.</li>
+          <li><strong>Quality & Freshness:</strong> From our restaurant partners to our delivery process, we maintain strict quality standards to ensure every order meets the highest level of freshness and taste.</li>
+          <li><strong>Innovation & Technology:</strong> We continuously improve our platform, systems, and delivery processes to provide a smarter, simpler, and faster food ordering experience for both customers and partners.</li>
+          <li><strong>Integrity & Trust:</strong> We believe in transparency, honesty, and reliability in every interaction — with customers, delivery partners, and restaurants. Trust is the foundation of our success.</li>
+          <li><strong>Teamwork & Collaboration:</strong> Behind every successful delivery is a dedicated team working together. From our drivers and customer support agents to restaurant partners, we value collaboration to ensure excellent service.</li>
+          <li><strong>Community & Care:</strong> SmartBite is more than just food delivery — we are part of the communities we serve. We support local restaurants, small businesses, and initiatives that bring people together through food.</li>
+        </ul>
+
+        <div style="text-align:center; margin-top: 40px;">
+          <img src="./SmartBite.png" alt="SmartBite Logo" width="300" style="border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" />
+          <p><em>“At SmartBite, we don’t just deliver food — we deliver smiles.”</em></p>
+        </div>
+      </section>
+    </div>
+
+    <div class="slideshow-container">
+      <div class="mySlides">
+        <div class="numbertext">1 / 6</div>
+        <img src="./Bite1 (1).jpg" alt="The Planning" />
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">2 / 6</div>
+        <img src="./Bite1 (2).jpg" alt="The evaluation" />
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">3 / 6</div>
+        <img src="./Bite1 (3).jpg" alt="The Crafting" />
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">4 / 6</div>
+        <img src="./Bites2 (1).jpg" alt="The Designing" />
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">5 / 6</div>
+        <img src="./Bites2 (2).jpg" alt="The Final Making" />
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">6 / 6</div>
+        <img src="./Donuts.jpg" alt="Donuts" />
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <div class="caption-container">
+        <p id="caption"></p>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <img class="demo cursor" src="./Bite1 (1).jpg" onclick="currentSlide(1)" alt="The Planning" />
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="./Bite1 (2).jpg" onclick="currentSlide(2)" alt="The evaluation" />
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="./Bite1 (3).jpg" onclick="currentSlide(3)" alt="The Crafting" />
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="./Bites2 (1).jpg" onclick="currentSlide(4)" alt="The Designing" />
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="./Bites2 (2).jpg" onclick="currentSlide(5)" alt="The Final Making" />
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="./Donuts.jpg" onclick="currentSlide(6)" alt="Donuts" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 SmartBite</p>
+  </footer>
+
+  <script>
+    // Slideshow JS
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) 
+    {
+      showSlides(slideIndex += n);
+    } //PushSlides
+
+    function currentSlide(n) 
+    {
+      showSlides(slideIndex = n);
+    } //DisplayedSlide
+
+    function showSlides(n) 
+    {
+      let i;
+      const slides = document.getElementsByClassName("mySlides");
+      const dots = document.getElementsByClassName("demo");
+      const captionText = document.getElementById("caption");
+
+      //if statement
+      if (n > slides.length) 
+        { slideIndex = 1; }
+      if (n < 1) 
+        { slideIndex = slides.length; }
+
+      for (i = 0; i < slides.length; i++) 
+      {
+        slides[i].style.display = "none";
+      } //for loop
+
+      for (i = 0; i < dots.length; i++) 
+      {
+        dots[i].className = dots[i].className.replace(" active", "");
+      } //for loop
+
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+  </script>
+</body>
+</html>
